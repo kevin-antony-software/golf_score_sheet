@@ -2,10 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:golf_score_sheet/screens/login.dart';
 import 'package:golf_score_sheet/screens/register.dart';
+import 'package:golf_score_sheet/screens/score_sheet.dart';
+import 'package:golf_score_sheet/src/utils/themes/theme.dart';
 
-import 'components/buttons.dart';
-
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
   runApp(const MyApp());
@@ -23,11 +23,15 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MyHomePage(title: "Golf Score Sheet"),
         '/register': (context) => const RegisterScreen(),
         '/login': (context) => const LoginScreen(),
+        '/scoreSheet': (context) => const ScoreSheet(),
       },
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        scaffoldBackgroundColor: Colors.yellow[100],
-      ),
+      theme: TAppTheme.lightTheme,
+      //ThemeData(
+      //   primarySwatch: Colors.green,
+      //   scaffoldBackgroundColor: Colors.yellow[100],
+      // ),
+      darkTheme: TAppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -41,23 +45,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // int _counter = 0;
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title, style: Theme.of(context).textTheme.headline4),
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/golf_course.jpg"),
+            image: AssetImage("assets/images/golf_course.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -67,12 +64,36 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                HomeButton('/login', "Login"),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    elevation: 10,
+                    minimumSize: Size(100, 20),
+                    backgroundColor: Colors.blueAccent,
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/login");
+                  },
+                  child: Text("Login"),
+                ),
                 SizedBox(
                   height: 10,
                   width: 50,
                 ),
-                HomeButton('/register', "Register"),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    elevation: 10,
+                    minimumSize: Size(100, 20),
+                    backgroundColor: Colors.blueAccent,
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/register");
+                  },
+                  child: Text("Register"),
+                ),
               ],
             ),
             SizedBox(

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -108,14 +107,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onPressed: () async {
                   if (password == rePassword) {
                     try {
-                      final newUser = await auth.createUserWithEmailAndPassword(
+                      final credential = await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
                         email: email,
                         password: password,
                       );
-                    } catch (e) {
-                      if (kDebugMode) {
-                        print(e);
+                      Navigator.pushNamed(context, '/scoreSheet');
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
                       }
+                    } catch (e) {
+                      print(e);
                     }
                   } else {
                     password = "";
