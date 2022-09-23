@@ -10,25 +10,73 @@ class ScoreSheet extends StatefulWidget {
 
 class _ScoreSheetState extends State<ScoreSheet> {
   @override
-  void initState() {
-    // TODO: implement initState
-
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User is signed in! $user ');
-      }
-    });
-
-    super.initState();
+  var isSignedIn = false;
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            isSignedIn = true;
+            return ScoreLoggedIn();
+          } else {
+            isSignedIn = false;
+            return ScoreLoggedOut();
+          }
+        },
+      ),
+    );
   }
+}
+
+class ScoreLoggedIn extends StatelessWidget {
+  const ScoreLoggedIn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      print("user Logged in :  " + user!.email.toString());
-    });
-    return Container();
+    return Container(
+      child: Column(
+        children: [
+          Expanded(
+            child: Text("ScoreSheet"),
+          ),
+          Expanded(
+            child: TextButton(
+              child: Text("logout"),
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, '/');
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ScoreLoggedOut extends StatelessWidget {
+  const ScoreLoggedOut({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Expanded(
+            child: Text("ScoreSheet 1111111"),
+          ),
+          Expanded(
+            child: TextButton(
+              child: Text("Login"),
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, '/login');
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

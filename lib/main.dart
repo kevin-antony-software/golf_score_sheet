@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:golf_score_sheet/screens/login.dart';
 import 'package:golf_score_sheet/screens/register.dart';
 import 'package:golf_score_sheet/screens/score_sheet.dart';
-import 'package:golf_score_sheet/src/utils/themes/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,12 +24,14 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/scoreSheet': (context) => const ScoreSheet(),
       },
-      theme: TAppTheme.lightTheme,
-      //ThemeData(
-      //   primarySwatch: Colors.green,
-      //   scaffoldBackgroundColor: Colors.yellow[100],
-      // ),
-      darkTheme: TAppTheme.darkTheme,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.yellow[100],
+      ),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.yellow[100],
+      ),
       themeMode: ThemeMode.system,
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );

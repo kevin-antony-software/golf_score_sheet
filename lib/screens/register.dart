@@ -34,7 +34,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     @override
     final auth = FirebaseAuth.instance;
 
-    bool showSpinner = false;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register New User'),
@@ -54,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: TextField(
                 controller: controllerUsername,
                 onChanged: (userName) {
@@ -68,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: TextField(
                 obscureText: true,
                 controller: controllerPassword,
@@ -82,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: TextField(
                 obscureText: true,
                 controller: controllerRePassword,
@@ -96,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: TextButton(
                 style: TextButton.styleFrom(
                   elevation: 10,

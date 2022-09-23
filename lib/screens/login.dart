@@ -12,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late String email;
   late String password;
+  late bool googleSignedIn = false;
 
   final controllerUsername = TextEditingController();
   final controllerPassword = TextEditingController();
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: Text(
                 "Login Details",
                 textAlign: TextAlign.center,
@@ -40,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: TextField(
                 controller: controllerUsername,
                 onChanged: (userName) {
@@ -54,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: TextField(
                 obscureText: true,
                 controller: controllerPassword,
@@ -67,8 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {},
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: Text(
                 "Forgot Password?",
                 textAlign: TextAlign.right,
@@ -77,8 +79,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
               child: TextButton(
                 style: TextButton.styleFrom(
                   elevation: 10,
@@ -109,31 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Text('Login'.toUpperCase()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: Text(
-                "OR",
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: OutlinedButton.icon(
-                icon: Image(
-                  image: AssetImage('assets/images/GooglePNG.png'),
-                  width: 20,
-                ),
-                onPressed: () {},
-                label: Text("Sign In With Google"),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                "Already Have a Account?",
-                style: TextStyle(color: Colors.blue),
-              ),
-            ),
+
           ],
         ),
       ),
